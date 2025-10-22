@@ -18,7 +18,12 @@ st.markdown("Connect to your Snowflake database and explore your data interactiv
 st.sidebar.header("🔧 Connection Settings")
 
 # Check if secrets are configured
-if "snowflake" in st.secrets:
+try:
+    has_secrets = "snowflake" in st.secrets
+except:
+    has_secrets = False
+
+if has_secrets:
     # Use secrets from .streamlit/secrets.toml
     connection_params = {
         "account": st.secrets["snowflake"]["account"],
